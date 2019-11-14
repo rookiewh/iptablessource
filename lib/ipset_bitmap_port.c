@@ -69,7 +69,7 @@ static struct ipset_type ipset_bitmap_port0 = {
 	},
 	.usage = "where PORT, FROM and TO are port numbers or port names from /etc/services.\n"
 		 "      PROTO is only needed if a service name is used and it does not exist\n"
-		 "      as a TCP service; it isn't used otherwise with the bitmap.",
+		 "      as a TCP service; just the resolved service numer is stored in the set.",
 	.description = "Initial revision",
 };
 
@@ -136,7 +136,7 @@ static struct ipset_type ipset_bitmap_port1 = {
 	},
 	.usage = "where PORT, FROM and TO are port numbers or port names from /etc/services.\n"
 		 "      PROTO is only needed if a service name is used and it does not exist\n"
-		 "      as a TCP service; it isn't used otherwise with the bitmap.",
+		 "      as a TCP service; just the resolved service numer is stored in the set.",
 	.description = "counters support",
 };
 
@@ -205,7 +205,7 @@ static struct ipset_type ipset_bitmap_port2 = {
 	},
 	.usage = "where PORT, FROM and TO are port numbers or port names from /etc/services.\n"
 		 "      PROTO is only needed if a service name is used and it does not exist\n"
-		 "      as a TCP service; it isn't used otherwise with the bitmap.",
+		 "      as a TCP service; just the resolved service numer is stored in the set.",
 	.description = "comment support",
 };
 
@@ -278,7 +278,7 @@ static struct ipset_type ipset_bitmap_port3 = {
 	},
 	.usage = "where PORT, FROM and TO are port numbers or port names from /etc/services.\n"
 		 "      PROTO is only needed if a service name is used and it does not exist\n"
-		 "      as a TCP service; it isn't used otherwise with the bitmap.",
+		 "      as a TCP service; just the resolved service numer is stored in the set.",
 	.description = "skbinfo support",
 };
 

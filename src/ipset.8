@@ -496,8 +496,9 @@ Create the set from the specified inclusive port range.
 The \fBset\fR match and \fBSET\fR target netfilter kernel modules interpret
 the stored numbers as TCP or UDP port numbers.
 .PP
-\fBproto\fR only needs to be specified if a service name is used,
-and that name does not exist as a TCP service.
+\fBproto\fR only needs to be specified if a service name is used
+and that name does not exist as a TCP service. The protocol is never stored
+in the set, just the port number of the service.
 .PP
 Examples:
 .IP 
