@@ -64,6 +64,12 @@ AS_VAR_IF([$1], [""], [$5], [$4])dnl
 ])# PKG_CHECK_VAR
 ])
 
+# This hack makes PKG_CHECK_VARS from m4/pkg.m4 work on autoconf 2.63
+# (courtesy of sunnybear in https://github.com/gdnsd/gdnsd/issues/85)
+m4_ifndef([AS_VAR_COPY],
+[m4_define([AS_VAR_COPY],
+[AS_LITERAL_IF([$1[]$2], [$1=$$2], [eval $1=\$$2])])])
+
 if test "x$enable_bashcompl" = "xyes"; then
 	PKG_CHECK_VAR(bashcompdir, [bash-completion], [completionsdir], , bashcompdir="${sysconfdir}/bash_completion.d")
 	AC_SUBST(bashcompdir)
