@@ -39,7 +39,7 @@ MODULE_ALIAS("ip6t_SET");
 #ifdef HAVE_XT_MTCHK_PARAM_STRUCT_NET
 #define XT_PAR_NET(par)	((par)->net)
 #else
-#define	XT_PAR_NET(par)	NULL
+#define	XT_PAR_NET(par)	(&(init_net))
 #endif
 
 static inline int
