@@ -535,6 +535,17 @@ if test -f $ksourcedir/include/net/pkt_sched.h && \
 else
 	AC_MSG_RESULT(no)
 	AC_SUBST(HAVE_TC_SKB_PROTOCOL, undef)
+
+	AC_MSG_CHECKING([kernel source for vlan_proto in struct sk_buff])
+	if test -f $ksourcedir/include/linux/skbuff.h && \
+	   $AWK '/^struct sk_buff {/,/^};$/' $ksourcedir/include/linux/skbuff.h | \
+	   $GREP -q 'vlan_proto'; then
+		AC_MSG_RESULT(yes)
+		AC_SUBST(HAVE_VLAN_PROTO_IN_SK_BUFF, define)
+	else
+		AC_MSG_RESULT(no)
+		AC_SUBST(HAVE_VLAN_PROTO_IN_SK_BUFF, undef)
+	fi
 fi
 
 AC_MSG_CHECKING([kernel source for struct net in struct xt_action_param])
