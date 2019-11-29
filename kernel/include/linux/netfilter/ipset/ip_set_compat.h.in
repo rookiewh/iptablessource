@@ -50,6 +50,7 @@
 #@HAVE_STRSCPY@ HAVE_STRSCPY
 #@HAVE_SYNCHRONIZE_RCU_BH@ HAVE_SYNCHRONIZE_RCU_BH
 #@HAVE_LOCKDEP_NFNL_IS_HELD@ HAVE_LOCKDEP_NFNL_IS_HELD
+#@HAVE_COND_RESCHED_RCU@ HAVE_COND_RESCHED_RCU
 
 #ifdef HAVE_EXPORT_SYMBOL_GPL_IN_MODULE_H
 #include <linux/module.h>
@@ -146,6 +147,17 @@ do {				\
 #error "CONFIG_SPARSE_RCU_POINTER must be enabled"
 #endif
 #endif
+#endif
+
+#ifndef HAVE_COND_RESCHED_RCU
+static inline void cond_resched_rcu(void)
+{
+#if defined(CONFIG_DEBUG_ATOMIC_SLEEP) || !defined(CONFIG_PREEMPT_RCU)
+	rcu_read_unlock();
+	cond_resched();
+	rcu_read_lock();
+#endif
+}
 #endif
 
 #if defined(CONFIG_NETFILTER_NETLINK) || defined(CONFIG_NETFILTER_NETLINK_MODULE)
