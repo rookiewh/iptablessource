@@ -335,9 +335,20 @@ static inline int nla_put_in6_addr(struct sk_buff *skb, int attrtype,
 
 #ifndef HAVE_TC_SKB_PROTOCOL
 #include <linux/if_vlan.h>
+
+/* RHEL defines it */
+#ifndef skb_vlan_tag_present
+#if !defined(vlan_tx_tag_present) && \
+    !defined(NETIF_F_HW_VLAN_TX) && \
+    !defined(NETIF_F_HW_VLAN_CTAG_TX)
+#define vlan_tx_tag_present(skb) 0
+#endif
+#define skb_vlan_tag_present vlan_tx_tag_present
+#endif
+
 static inline __be16 tc_skb_protocol(const struct sk_buff *skb)
 {
-	if (vlan_tx_tag_present(skb))
+	if (skb_vlan_tag_present(skb))
 #ifdef HAVE_VLAN_PROTO_IN_SK_BUFF
 		return skb->vlan_proto;
 #else
