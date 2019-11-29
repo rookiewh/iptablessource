@@ -499,11 +499,6 @@ set_target_v3_checkentry(const struct xt_tgchk_param *par)
 	}
 
 	if (info->map_set.index != IPSET_INVALID_ID) {
-		if (strncmp(par->table, "mangle", 7)) {
-			pr_warn("--map-set only usable from mangle table\n");
-			ret = -EINVAL;
-			goto cleanup_del;
-		}
 		if (((info->flags & IPSET_FLAG_MAP_SKBPRIO) |
 		     (info->flags & IPSET_FLAG_MAP_SKBQUEUE)) &&
 		     (par->hook_mask & ~(1 << NF_INET_FORWARD |
