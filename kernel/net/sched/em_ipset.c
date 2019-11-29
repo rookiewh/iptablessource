@@ -15,10 +15,10 @@
 #include <linux/string.h>
 #include <linux/skbuff.h>
 #include <linux/netfilter/xt_set.h>
-#include <linux/netfilter/ipset/ip_set_compat.h>
 #include <linux/ipv6.h>
 #include <net/ip.h>
 #include <net/pkt_cls.h>
+#include <linux/netfilter/ipset/ip_set_compat.h>
 
 #ifdef HAVE_TCF_EMATCH_OPS_CHANGE_ARG_NET
 static int em_ipset_change(struct net *net, void *data, int data_len,

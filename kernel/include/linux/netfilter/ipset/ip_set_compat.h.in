@@ -51,6 +51,7 @@
 #@HAVE_SYNCHRONIZE_RCU_BH@ HAVE_SYNCHRONIZE_RCU_BH
 #@HAVE_LOCKDEP_NFNL_IS_HELD@ HAVE_LOCKDEP_NFNL_IS_HELD
 #@HAVE_COND_RESCHED_RCU@ HAVE_COND_RESCHED_RCU
+#@HAVE_SKB_IIF@ HAVE_SKB_IIF
 
 #ifdef HAVE_EXPORT_SYMBOL_GPL_IN_MODULE_H
 #include <linux/module.h>
@@ -428,6 +429,22 @@ static inline u16 nfnl_msg_type(u8 subsys, u8 msg_type)
 
 #ifndef SIZE_MAX
 #define SIZE_MAX	(~(size_t)0)
+#endif
+
+#ifndef TCF_EM_IPSET
+#define TCF_EM_IPSET 8
+#endif
+
+#ifndef HAVE_SKB_IIF
+#define skb_iif iif
+#endif
+
+#ifndef HAVE_DEV_GET_BY_INDEX_RCU
+/* This should not be considered RCU-safe on all architectures.
+ * You probably should consider upgrading your kernel in case of
+ * kernel crashes including em_ipset and this function call.
+ */
+#define dev_get_by_index_rcu __dev_get_by_index
 #endif
 
 #endif /* IP_SET_COMPAT_HEADERS */

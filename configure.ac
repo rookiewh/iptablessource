@@ -554,6 +554,17 @@ else
 	fi
 fi
 
+AC_MSG_CHECKING([kernel source for iif to skb_iif rename in struct sk_buff])
+if test -f $ksourcedir/include/linux/skbuff.h && \
+   $AWK '/^struct sk_buff {/,/^};$/' $ksourcedir/include/linux/skbuff.h | \
+   $GREP -q 'skb_iif'; then
+	AC_MSG_RESULT(yes)
+	AC_SUBST(HAVE_SKB_IIF, define)
+else
+	AC_MSG_RESULT(no)
+	AC_SUBST(HAVE_SKB_IIF, undef)
+fi
+
 AC_MSG_CHECKING([kernel source for struct net in struct xt_action_param])
 if test -f $ksourcedir/include/linux/netfilter/x_tables.h && \
    $AWK '/^struct xt_action_param /,/^}/' $ksourcedir/include/linux/netfilter/x_tables.h | \
